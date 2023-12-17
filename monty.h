@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 /* DATA STRUCTURES */
 
 /**
@@ -42,6 +41,7 @@ typedef struct instruction_s
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
-void (*get_opcode(char *buffer))(stack_t **, unsigned int);
+void (*get_opcode(char *buffer, unsigned int line))(stack_t **, unsigned int);
+void free_dlist(stack_t **stack);
 
 #endif /* MONTY_H */

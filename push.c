@@ -9,6 +9,11 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	temp = malloc(sizeof(stack_t));
+	if (temp == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	temp->n = line_number;
 	temp->next = NULL;
 	if (*stack == NULL)

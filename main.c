@@ -7,14 +7,14 @@
  */
 int main(int argc, char **argv)
 {
-	char *filename, *opc;
+	unsigned int line = 0;
+	char *filename, *opc, *token, buffer[300];
 	FILE *file;
-	char buffer[300];
 	unsigned int num;
 	void (*p)(stack_t **, unsigned int);
 	stack_t *last_node = NULL;
-	char *token;
 
+	(void)line;
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -33,16 +33,10 @@ int main(int argc, char **argv)
 		token = strtok(NULL, " \t");
 		if (token != NULL)
 			num = atoi(token);
-		p = get_opcode(opc);
+		line++;
+		p = get_opcode(opc, line);
 		if (p != NULL)
-		{
-			if (last_node != NULL)
-			{
-				while (last_node->next != NULL)
-					last_node = last_node->next;
-			}
 			p(&last_node, num);
-		}
 	}
 	fclose(file);
 	return (0);

@@ -2,10 +2,11 @@
 /**
  * get_opcode - gets function corresponding to opcode
  * @buffer: opcode
+ * @line: line number
  * Return: pointer to function that gets a double pointer to
  * a stack and an int and returns void
  */
-void (*get_opcode(char *buffer))(stack_t **, unsigned int)
+void (*get_opcode(char *buffer, unsigned int line))(stack_t **, unsigned int)
 {
 	int i = 0;
 	instruction_t instructions[] = {
@@ -18,5 +19,6 @@ void (*get_opcode(char *buffer))(stack_t **, unsigned int)
 			return (instructions[i].f);
 		i++;
 	}
-	return (NULL);
+	fprintf(stderr, "L%d: unknown instruction %s\n", line, buffer);
+	exit(EXIT_FAILURE);
 }
