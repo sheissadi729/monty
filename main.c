@@ -29,14 +29,19 @@ int main(int argc, char **argv)
 	}
 	while (fgets(buffer, 300, file) != NULL)
 	{
-		opc = strtok(buffer, " $\t");
-		token = strtok(NULL, " \t");
+		opc = strtok(buffer, " $\t\n");
+		token = strtok(NULL, " \t\n");
 		if (token != NULL)
 			num = atoi(token);
 		line++;
 		p = get_opcode(opc, line);
 		if (p != NULL)
-			p(&last_node, num);
+		{
+			if (strcmp(opc, "push") == 0)
+				p(&last_node, num);
+			else
+				p(&last_node, line);
+		}
 	}
 	fclose(file);
 	return (0);

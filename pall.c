@@ -9,11 +9,14 @@ void pall(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	(void)line_number;
-	temp = *stack;
-	while (temp != NULL)
+	if (*stack != NULL)
 	{
-		printf("%d\n", temp->n);
-		temp = temp->prev;
+		temp = *stack;
+		while (temp != NULL)
+		{
+			printf("%d\n", temp->n);
+			temp = temp->prev;
+		}
+		free_dlist(stack);
 	}
-	free_dlist(stack);
 }
