@@ -33,6 +33,8 @@ int main(int argc, char **argv)
 		token = strtok(NULL, " \t\n");
 		if (token != NULL)
 			num = atoi(token);
+		if (opc == NULL)
+			continue;
 		line++;
 		p = get_opcode(opc, line);
 		if (p != NULL)

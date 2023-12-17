@@ -11,7 +11,7 @@ void (*get_opcode(char *buffer, unsigned int line))(stack_t **, unsigned int)
 	int i = 0;
 	instruction_t instructions[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, 
-		{"pop", pop}, {"swap", swap}, {NULL, NULL}
+		{"pop", pop}, {"swap", swap}, {"add", add}, {NULL, NULL}
 	};
 
 	while (instructions[i].opcode != NULL)
