@@ -1,18 +1,25 @@
 #include "monty.h"
 /**
  * push - pushes an int to the stack
- * @ptr: pointer to the last node of a doubly linked list
- * @num: int to add to the stack
- * Return: node created
+ * @stack: double pointer to the last node of a doubly linked list
+ * @line_number: line number
  */
-stack_t *push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
 	temp = malloc(sizeof(stack_t));
 	temp->n = line_number;
 	temp->next = NULL;
-	temp->prev = *stack;
-	(*stack)->next = temp;
-	return (temp);
+	if (*stack == NULL)
+	{
+		temp->prev = NULL;
+		*stack = temp;
+	}
+	else
+	{
+		temp->prev = *stack;
+		(*stack)->next = temp;
+		*stack = temp;
+	}
 }

@@ -1,16 +1,19 @@
 #include "monty.h"
 /**
- *
+ * main - opens a file and gets the instruction
+ * @argc: number of arguments
+ * @argv: arguments vector
+ * Return: 0 (success)
  */
 int main(int argc, char **argv)
 {
 	char *filename, *opc;
 	FILE *file;
-	int size = 300, call = 0;
-	char buffer[size];
+	char buffer[300];
 	unsigned int num;
-	stack_t *p(stack_t **, unsigned int);
-	stack_t *stack, *temp;
+	void (*p)(stack_t **, unsigned int);
+	stack_t *last_node = NULL;
+	char *token;
 
 	if (argc != 2)
 	{
@@ -24,25 +27,23 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(buffer, size, file) != NULL)
+	while (fgets(buffer, 300, file) != NULL)
 	{
-		opc = strtok(buffer, " \t");
-		num = atoi(strtok(NULL, " \t"));
+		opc = strtok(buffer, " $\t");
+		token = strtok(NULL, " \t");
+		if (token != NULL)
+			num = atoi(token);
 		p = get_opcode(opc);
 		if (p != NULL)
 		{
-			if (call == 1)
+			if (last_node != NULL)
 			{
-				stack = NULL;
-				p(&stack, num);
+				while (last_node->next != NULL)
+					last_node = last_node->next;
 			}
-			else
-			{
-				while (temp->next != NULL)
-					temp = temp->next;
-				p(&temp, num);
-			}
+			p(&last_node, num);
 		}
 	}
 	fclose(file);
+	return (0);
 }
