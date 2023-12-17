@@ -44,5 +44,6 @@ int main(int argc, char **argv)
 		}
 	}
 	fclose(file);
+	free_dlist(&last_node);
 	return (0);
 }
