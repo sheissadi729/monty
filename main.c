@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		token = strtok(NULL, " \t\n");
 		line++;
 		if (*opc == '#')
-			nop(&last_node, line);
+			continue;
 		if (token != NULL)
 			num = atoi(token);
 		if (opc == NULL)
