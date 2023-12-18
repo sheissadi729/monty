@@ -31,18 +31,16 @@ int main(int argc, char **argv)
 		line++;
 		if (token != NULL)
 			num = atoi(token);
-		if (num == 0)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line);
-			exit(EXIT_FAILURE);
-		}
 		if (opc == NULL)
 			continue;
 		p = get_opcode(opc, line);
-		if (strcmp(opc, "push") == 0)
-			p(&last_node, num);
-		else
-			p(&last_node, line);
+		if (p != NULL)
+		{
+			if (strcmp(opc, "push") == 0)
+				p(&last_node, num);
+			else
+				p(&last_node, line);
+		}
 	}
 	fclose(file);
 	free_dlist(&last_node);
